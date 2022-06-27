@@ -15,3 +15,5 @@ def dowelltraining1(request):
         LastName= request_data['lastname']
         fullName = f"Your name is {Name} {LastName}"
         return JsonResponse ({"Answer":fullName})
+
+
