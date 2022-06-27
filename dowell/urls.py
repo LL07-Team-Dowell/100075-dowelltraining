@@ -1,7 +1,7 @@
 from django.urls import path
 
-from dowell.views import api_call 
+from dowell.views import dowelltraining1 
 
 urlpatterns =[
-    path('api_call/',api_call, name= 'api_call'),
+    path('dowelltraining1/',dowelltraining1, name= 'call_dowelltraining1'),
 ]

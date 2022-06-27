@@ -7,7 +7,7 @@ import sys
 
 #convert function to api
 @csrf_exempt
-def api_call(request):
+def dowelltraining1(request):
     if (request.method=="POST"):
         request_data=json.loads(request.body)
         print(request_data)
