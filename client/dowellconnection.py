@@ -13,7 +13,7 @@ payload = json.dumps({
     "function_ID": "ABCDE",
     "command": "insert",
     "field": {
-        "Test": "Training_test"
+        "fullname": "Your name is uxliving lab"
         },
     "update_field": {
         "order_nos": 21

@@ -79,7 +79,7 @@ def dowelltraining2(request):
             "command": "insert",
             "field": {
                 "event_id" : get_event_id(),
-                "fullname": fullName
+                "full_name": fullName
                 },
             "update_field": {
                 "order_nos": 21
