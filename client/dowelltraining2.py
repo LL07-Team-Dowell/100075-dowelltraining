@@ -1,10 +1,10 @@
 import json
 import requests
 
-#url = 'http://127.0.0.1:8000/dowell_training_api/dowelltraining1/'
-url = 'https://100075.pythonanywhere.com/dowell_training_api/dowelltraining1/'
+#url = 'http://127.0.0.1:8000/dowell_training_api/dowelltraining2/'
+url = 'https://100075.pythonanywhere.com/dowell_training_api/dowelltraining2/'
 
-def dowelltraining1(name, lastname):
+def dowelltraining2(name, lastname):
     #("Dowell", "research") - sample data
     data={
         "name":name,
