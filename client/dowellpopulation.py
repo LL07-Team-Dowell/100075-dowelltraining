@@ -65,6 +65,6 @@ def targeted_population(database, collection, fields, period):
 
 
 
-response = targeted_population('dowelltraining', 'hr_hiring', ['fullname'], 'life_time')
+response = targeted_population('dowelltraining', 'hr_hiring', ['full_name'], 'life_time')
 
 print(response)

@@ -78,7 +78,7 @@ def dowelltraining2(request):
             "function_ID": "ABCDE",
             "command": "insert",
             "field": {
-                "event_id" : get_event_id(),
+                "eventId" : get_event_id(),
                 "full_name": fullName
                 },
             "update_field": {
