@@ -92,6 +92,67 @@ def dowelltraining2(request):
 
         response = requests.request("POST", url, headers=headers, data=payload)
         print(response.text)
-        return JsonResponse ({"Inserted Sucessfully":response.text})
+        return JsonResponse ({"Data inserted sucessfully using dowellcoonection function":response.text})
 
         #return JsonResponse ({"Answer":fullName})
+#dowellpopulation function to fetch data
+@csrf_exempt
+def dowelltraining3(request):
+    if (request.method=="POST"):
+        request_data=json.loads(request.body)
+        print(request_data)
+        db_name = request_data['db_name']
+        collection_name= request_data['collection_name']
+        field_name=request_data['field_name']
+        time_period=request_data['time_period']
+        def targeted_population(database, collection, fields, period):
+            url = 'http://100032.pythonanywhere.com/api/targeted_population/'
+            database_details = {
+                'database_name': 'mongodb',
+                'collection': collection,
+                'database': database,
+                'fields': fields
+                }
+            number_of_variables = -1
+
+            time_input = {
+                'column_name': 'Date',
+                'split': 'week',
+                'period': period,
+                'start_point': '2021/01/08',
+                'end_point': '2021/01/25',
+                }
+
+            stage_input_list = [
+                ]
+
+    
+            distribution_input={
+                'normal': 1,
+                'poisson':0,
+                'binomial':0,
+                'bernoulli':0
+                }
+            request_data={
+                'database_details': database_details,
+                'distribution_input': distribution_input,
+                'number_of_variable':number_of_variables,
+                'stages':stage_input_list,
+                'time_input':time_input,
+                }
+
+            headers = {'content-type': 'application/json'}
+
+            response = requests.post(url, json=request_data,headers=headers)
+
+            return response.text
+        response = targeted_population(db_name,collection_name,field_name,time_period)
+        print(response)
+        return JsonResponse ({"Data fetched using dowellpopulation function":response})
+
+
+@csrf_exempt
+def home(request):
+    return render(request, "dowellpopulation.html")
+
+    
