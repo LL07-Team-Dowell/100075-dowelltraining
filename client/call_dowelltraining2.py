@@ -4,4 +4,4 @@ def call_fun(name,lastname):
     NewObjectID=dowelltraining2(name,lastname)
     return NewObjectID
 
-print(call_fun("uxliving","lab"))
+print(call_fun("100018","Workflow"))

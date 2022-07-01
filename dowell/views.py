@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -56,8 +56,8 @@ def dowelltraining1(request):
         Name = request_data['name']
         LastName= request_data['lastname']
         fullName = f"Your name is {Name} {LastName}"
-        return JsonResponse ({"Answer":fullName})
-
+        #return JsonResponse ({"Answer":fullName})
+        return HttpResponse(fullName)
 #dowellconnection insert data
 @csrf_exempt
 def dowelltraining2(request):
@@ -92,7 +92,8 @@ def dowelltraining2(request):
 
         response = requests.request("POST", url, headers=headers, data=payload)
         print(response.text)
-        return JsonResponse ({"Data inserted sucessfully using dowellcoonection function":response.text})
+        #return JsonResponse ({"Data inserted sucessfully using dowellcoonection function":response.text})
+        return HttpResponse(response.text)
 
         #return JsonResponse ({"Answer":fullName})
 #dowellpopulation function to fetch data
@@ -148,8 +149,8 @@ def dowelltraining3(request):
             return response.text
         response = targeted_population(db_name,collection_name,field_name,time_period)
         print(response)
-        return JsonResponse ({"Data fetched using dowellpopulation function":response})
-
+        #return JsonResponse ({"Data fetched using dowellpopulation function":response})
+        return HttpResponse(response)
 
 @csrf_exempt
 def home(request):
