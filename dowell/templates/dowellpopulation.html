@@ -5,55 +5,56 @@
     <div class="card">
         <h5 class="card-header">Dowell Popultion function</h5>
         <div class="card-body">
-          <h5 class="card-title">How to call API</h5>
           <p class="card-text">
-            import json</br>
-            import requests</br>
-            def targeted_population(database, collection, fields, period):</br>
-            &nbsp; &nbsp; &nbsp;url = 'http://100032.pythonanywhere.com/api/targeted_population/'</br>
-            &nbsp; &nbsp; &nbsp;database_details = {</br>
-                &nbsp; &nbsp; &nbsp;'database_name': 'mongodb',</br>
-                &nbsp; &nbsp; &nbsp;'collection': collection,</br>
-                &nbsp; &nbsp; &nbsp;'database': database,</br>
-                &nbsp; &nbsp; &nbsp;'fields': fields</br>
-                &nbsp; &nbsp; &nbsp;}</br>
-                &nbsp; &nbsp; &nbsp;number_of_variables = -1</br>
+            <pre>
+                <code>
+                    import json
+                    import requests
+                    def targeted_population(database, collection, fields, period):
 
-            time_input = {</br>
-                'column_name': 'Date',
-                'split': 'week',
-                'period': period,
-                'start_point': '2021/01/08',
-                'end_point': '2021/01/25',
-                }
+                        url = 'http://100032.pythonanywhere.com/api/targeted_population/'
 
-            stage_input_list = [
-                ]
+                        database_details = {
+                            'database_name': 'mongodb',
+                            'collection': collection,
+                            'database': database,
+                            'fields': fields
+                        }
+                        # number of variables for sampling rule
+                        number_of_variables = -1
 
-    
-            distribution_input={
-                'normal': 1,
-                'poisson':0,
-                'binomial':0,
-                'bernoulli':0
-                }
-            request_data={
-                'database_details': database_details,
-                'distribution_input': distribution_input,
-                'number_of_variable':number_of_variables,
-                'stages':stage_input_list,
-                'time_input':time_input,
-                }
+                        time_input = {
+                            'column_name': 'Date',
+                            'split': 'week',
+                            'period': period,
+                            'start_point': '2021/01/08',
+                            'end_point': '2021/01/25',
+                        }
+                        stage_input_list = [
+                        ]
+                        # distribution input
+                        distribution_input={
+                            'normal': 1,
+                            'poisson':0,
+                            'binomial':0,
+                            'bernoulli':0
 
-            headers = {'content-type': 'application/json'}
-
-            response = requests.post(url, json=request_data,headers=headers)
-
-            return response.text
-        response = targeted_population(db_name,collection_name,field_name,time_period)
-        print(response)
+                        }
+                        request_data={
+                            'database_details': database_details,
+                            'distribution_input': distribution_input,
+                            'number_of_variable':number_of_variables,
+                            'stages':stage_input_list,
+                            'time_input':time_input,
+                        }
+                        headers = {'content-type': 'application/json'}
+                        response = requests.post(url, json=request_data,headers=headers)
+                        return response.text
+                    response = targeted_population('hr_hiring','dowelltraining',  ['full_name'], 'life_time')
+                    print(response)
+                </code>
+            </pre>
           </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
 </body>
