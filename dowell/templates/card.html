@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The button Element</h1>
+
+<button id="post-btn">I'm a button</button>
+ 
+<script type = "text/javascript">
+    const button = document.getElementById('post-btn');
+
+button.addEventListener('click', async _ => {
+  try {     
+    const response = await fetch('http://127.0.0.1:8000/dowell_training_api/home/', {
+      method: 'post',
+      body: {
+        "name":"manish",
+        "lastname":"Dash"
+      }
+    });
+    console.log('Completed!', response);
+  } catch(err) {
+    console.error(`Error: ${err}`);
+  }
+});
+</script>
+</body>
+</html>
+

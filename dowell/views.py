@@ -11,6 +11,18 @@ import pprint
 from datetime import datetime
 import requests
 
+#serializers
+from rest_framework import status
+from rest_framework.response import Response
+from django.db.models import Q
+
+from .models import Population
+from .serializers import PopulationFunctionSerializer
+from rest_framework import permissions
+from rest_framework.decorators import api_view
+from django.shortcuts import redirect
+
+
 def get_event_id():
     dd=datetime.now()
     time=dd.strftime("%d:%m:%Y,%H:%M:%S")
@@ -153,7 +165,18 @@ def dowelltraining3(request):
         return HttpResponse(response)
 
 @csrf_exempt
+@api_view(['POST'])
 def home(request):
-    return render(request, "dowellpopulation.html")
+    serializer = PopulationFunctionSerializer(data=request.data)
+    print(serializer)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    
+
+@api_view(['GET'])
+def get_name(request):
+    jobs = Population.objects.all()
+    serializer = PopulationFunctionSerializer(jobs, many=True)
+    return Response(serializer.data)
