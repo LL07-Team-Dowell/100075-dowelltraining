@@ -1,0 +1,39 @@
+
+#how to use login function
+@csrf_exempt
+def login_training(request):
+    # for django developers
+    session_id=request.GET.get('session_id',None)
+    field={"SessionID":session_id}
+    usr=dowellconnection("login","bangalore","login","registration","registration","10004545","ABCDE","fetch",field,"nil")
+    r=json.loads(usr) # this variable have all user details
+    if len(r["data"])<1:
+        return redirect("https://100014.pythonanywhere.com/?code=100068%22") # here code means your pythonanywhere account name
+    else:
+        return render_template('home.html') # here you can use your home page also you can pass r.Useranme etc
+
+
+#for mobile application developers. you must design login page as https://100014.pythonanywhere.com/ or copy this
+url="http://100014.pythonanywhere.com/api/mobilelogin/" # when you use this api you can get jwt token in response. example post {"username","password","location","device","os","browser","time","ip",type_of_conn"}
+userurl="http://100014.pythonanywhere.com/api/user/" # this url is get user details using that jwt token. you can not get this details without login
+
+signupurl='https://100014.pythonanywhere.com/api/register/' # {'username', 'email', 'phone','first_name','last_name','role'='TeamMember','teamcode','password','phonecode','profile_image'} role must be TeamMember
+
+
+#for frontend developers(angular,react). you must design login page as https://100014.pythonanywhere.com/ or copy this
+url="http://100014.pythonanywhere.com/api/login/" # when you use this api you can get jwt token in response. example post {"username","password","location","device","os","browser","time","ip",type_of_conn"}
+userurl="http://100014.pythonanywhere.com/api/user/" # this url is get user details(like "username":"lav","email":"nagaswrn@gmail.com","role":"Admin","teamcode":"100014") in response using that jwt token. you can not get this details without login
+payload = {
+        'username': username,
+        'password': password,
+        'location':location,
+        'device':device,
+        'os':os,
+        'browser':browser,
+        'time':time,
+        'ip':ip,
+        'type_of_conn':type_of_conn
+}
+p = s.post(url, data=payload)
+signupurl='https://100014.pythonanywhere.com/api/register/' # {'username', 'email', 'phone','first_name','last_name','role'='TeamMember','teamcode','password','phonecode','profile_image'} role must be TeamMember
+"""
