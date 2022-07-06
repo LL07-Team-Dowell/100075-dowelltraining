@@ -9,7 +9,6 @@ import requests
 import pprint
 #dowell event_id
 from datetime import datetime
-import requests
 
 #serializers
 from rest_framework import status
@@ -18,9 +17,8 @@ from django.db.models import Q
 
 from .models import Population
 from .serializers import PopulationFunctionSerializer
-from rest_framework import permissions
 from rest_framework.decorators import api_view
-from django.shortcuts import redirect
+
 
 
 def get_event_id():
