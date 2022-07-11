@@ -20,7 +20,6 @@ from .serializers import PopulationFunctionSerializer
 from rest_framework.decorators import api_view
 
 
-
 def get_event_id():
     dd=datetime.now()
     time=dd.strftime("%d:%m:%Y,%H:%M:%S")
@@ -178,3 +177,4 @@ def get_name(request):
     jobs = Population.objects.all()
     serializer = PopulationFunctionSerializer(jobs, many=True)
     return Response(serializer.data)
+
