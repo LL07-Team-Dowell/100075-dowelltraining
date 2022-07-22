@@ -67,6 +67,16 @@ def dowelltraining1(request):
         fullName = f"Your name is {Name} {LastName}"
         #return JsonResponse ({"Answer":fullName})
         return HttpResponse(fullName)
+
+@csrf_exempt
+def dowellweb(request):
+    if (request.method=="POST"):
+        Name = request.POST['data1']
+        LastName= request.POST['data2']
+        fullName = f"Your name is {Name} {LastName}"
+        return JsonResponse ({"Answer":fullName})
+        #return HttpResponse(fullName)
+
 #dowellconnection insert data
 @csrf_exempt
 def dowelltraining2(request):
