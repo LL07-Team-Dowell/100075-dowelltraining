@@ -155,7 +155,7 @@ return render(request , 'dowelltraining3web.html')
         formData.append('data3', data3);
         formData.append('data4', data4);
         
-        const request = await fetch("http://127.0.0.1:8000/dowell_training_webapi/dowelltraining3web/", { 
+        const request = await fetch("https://100075.pythonanywhere.com/dowell_training_webapi/dowelltraining3web/", { 
             
           method: 'POST',
           body: formData,
@@ -167,44 +167,7 @@ return render(request , 'dowelltraining3web.html')
         console.log(response);
       
       }
-    {% comment %} $(function () {
-                   
-        $(".submit").click(function (e) {
-            
-            e.preventDefault();
-            var data1 = $(this).closest('.div1').find('.input1').val();
-            var data2 = $(this).closest('.div1').find('.input2').val();
-            var data3 = $(this).closest('.div1').find('.input3').val();
-            var data4 = $(this).closest('.div1').find('.input4').val();
-        
-            var token = $('input[name=csrfmiddlewaretoken ]').val();
-            
-       
-          $.ajax({
-            method : 'POST',
-            url :'http://127.0.0.1:8000/dowell_training_api/dowelltraining3web/',
-            data:{
-                'data1' : data1,
-                'data2': data2,
-                'data3': data3,
-                'data4': data4,
-                csrfmiddlewaretoken : token
-            },
-           
-            success: function(response)
-            {
-                      console.log(response)
-                      alertify.success(response.status)
-            }
-                    
-    
-    
-            });
-    
-        });
-    
-       
-    }); {% endcomment %}
+
 </script>
 </body>
 </html>
