@@ -19,7 +19,8 @@ from .models import Population
 from .serializers import PopulationFunctionSerializer
 from rest_framework.decorators import api_view
 
-
+def index(request):
+    return render(request , 'index.html')
 def get_event_id():
     dd=datetime.now()
     time=dd.strftime("%d:%m:%Y,%H:%M:%S")
@@ -70,7 +71,9 @@ def dowelltraining1(request):
 
 @csrf_exempt
 def dowellweb(request):
+  
     if (request.method=="POST"):
+        print('a')
         Name = request.POST['data1']
         LastName= request.POST['data2']
         fullName = f"Your name is {Name} {LastName}"
@@ -116,6 +119,43 @@ def dowelltraining2(request):
 
         #return JsonResponse ({"Answer":fullName})
 #dowellpopulation function to fetch data
+
+@csrf_exempt
+def dowelltrainingwebsite(request):
+    if (request.method=="POST"):
+    
+        Name = request.POST['data1']
+        LastName= request.POST['data2']
+        fullName = f"Your name is {Name} {LastName}"
+        url = "http://100002.pythonanywhere.com/" 
+        #searchstring="ObjectId"+"("+"'"+"6139bd4969b0c91866e40551"+"'"+")"
+        payload = json.dumps({
+            "cluster": "hr_hiring",
+            "database": "hr_hiring",
+            "collection": "dowelltraining",
+            "document": "dowelltraining",
+            "team_member_ID": "1000554",
+            "function_ID": "ABCDE",
+            "command": "insert",
+            "field": {
+                "eventId" : get_event_id(),
+                "full_name": fullName
+                },
+            "update_field": {
+                "order_nos": 21
+                },
+            "platform": "bangalore"
+            })
+        headers = {
+            'Content-Type': 'application/json'
+            }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
+        print('aaaa',response.text)
+        print(response)
+        return JsonResponse ({"Answer":fullName})
+        # return HttpResponse(response.text)
+
 @csrf_exempt
 def dowelltraining3(request):
     if (request.method=="POST"):
@@ -188,3 +228,57 @@ def get_name(request):
     serializer = PopulationFunctionSerializer(jobs, many=True)
     return Response(serializer.data)
 
+@csrf_exempt
+def dowelltraining3web(request):
+    if (request.method=="POST"):
+       
+        db_name = request.POST['data1']
+        collection_name= request.POST['data2']
+        field_name= request.POST['data3']
+        time_period= request.POST['data4']
+        print(db_name , collection_name , field_name , time_period)
+        def targeted_population(database, collection, fields, period):
+            url = 'http://100032.pythonanywhere.com/api/targeted_population/'
+            database_details = {
+                'database_name': 'mongodb',
+                'collection': collection,
+                'database': database,
+                'fields': fields
+                }
+            number_of_variables = -1
+
+            time_input = {
+                'column_name': 'Date',
+                'split': 'week',
+                'period': period,
+                'start_point': '2021/01/08',
+                'end_point': '2021/01/25',
+                }
+
+            stage_input_list = [
+                ]
+
+    
+            distribution_input={
+                'normal': 1,
+                'poisson':0,
+                'binomial':0,
+                'bernoulli':0
+                }
+            request_data={
+                'database_details': database_details,
+                'distribution_input': distribution_input,
+                'number_of_variable':number_of_variables,
+                'stages':stage_input_list,
+                'time_input':time_input,
+                }
+
+            headers = {'content-type': 'application/json'}
+
+            response = requests.post(url, json=request_data,headers=headers)
+            print(response.text)
+            return response.text
+        response1 = targeted_population(db_name,collection_name,field_name,time_period)
+        return JsonResponse ({"Data fetched using dowellpopulation function":response1})
+    
+    return render(request , 'dowelltraining3web.html')
