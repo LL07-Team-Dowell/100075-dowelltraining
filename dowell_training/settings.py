@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dowell',
+    'dowelltraining.apps.DowelltrainingConfig',
+    'dowell.apps.DowellConfig',
     'rest_framework',
     'gmailapi_backend',
 ]

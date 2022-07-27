@@ -19,4 +19,5 @@ from django.urls import path , include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dowell_training_api/',include('dowell.urls')),
+    path('dowell_training_webapi/',include('dowelltraining.urls')),
 ]
