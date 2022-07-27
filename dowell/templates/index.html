@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+  <title>Testing</title>
+</head>
+<body style="font-family:Verdana;"><br>
+  <h1 style="text-align:center;">DowellTraining2 </h1><br>
+  <textarea type="text" class="form-control" id="myInput" name="output" rows="6" cols="30" disabled style="margin-left:50px; margin-right:50px; background-color:black; color:white;">
+    from dowelltraining2 import dowelltraining2
+
+    def call_fun(name,lastname):
+        NewObjectID=dowelltraining2(name,lastname)
+        return NewObjectID
+    
+    print(call_fun("100018","Workflow"))
+    
+    
+</textarea>
+
+<button style='margin-left:50px;' class="btn btn-secondary" onclick="myFunction()">Copy text</button>
+</br>
+</br>
+  <textarea type="text" class="form-control" id="myInput1" name="output" rows="18" cols="30" disabled style="margin-left:50px; margin-right:50px; background-color:black; color:white;">
+    import json
+    import requests
+    
+    #url = 'http://127.0.0.1:8000/dowell_training_api/dowelltraining2/'
+    url = 'https://100075.pythonanywhere.com/dowell_training_api/dowelltraining2/'
+    
+    def dowelltraining2(name, lastname):
+        #("Dowell", "research") - sample data
+        data={
+            "name":name,
+            "lastname":lastname,
+            }
+    
+        headers = {'content-type': 'application/json'}
+        response = requests.post(url, json =data,headers=headers)
+        return response.text
+</textarea>
+
+<button style='margin-left:50px;' class="btn btn-secondary" onclick="myFunction1()">Copy text</button>
+</br>
+</br>
+  <textarea type="text" class="form-control" id="myInput2" name="output" rows="35" cols="30" disabled style="margin-left:50px; margin-right:50px; background-color:black; color:white;">
+    if (request.method=="POST"):
+    
+    Name = request.POST['data1']
+    LastName= request.POST['data2']
+    fullName = f"Your name is {Name} {LastName}"
+    url = "http://100002.pythonanywhere.com/" 
+    #searchstring="ObjectId"+"("+"'"+"6139bd4969b0c91866e40551"+"'"+")"
+    payload = json.dumps({
+        "cluster": "hr_hiring",
+        "database": "hr_hiring",
+        "collection": "dowelltraining",
+        "document": "dowelltraining",
+        "team_member_ID": "1000554",
+        "function_ID": "ABCDE",
+        "command": "insert",
+        "field": {
+            "eventId" : get_event_id(),
+            "full_name": fullName
+            },
+        "update_field": {
+            "order_nos": 21
+            },
+        "platform": "bangalore"
+        })
+    headers = {
+        'Content-Type': 'application/json'
+        }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    print('aaaa',response.text)
+    print(response)
+    return JsonResponse ({"Answer":fullName})
+ 
+  
+</textarea>
+
+<button style='margin-left:50px;' class="btn btn-secondary" onclick="myFunction2()">Copy text</button>
+</br>
+</br>
+<div class="form-group"   style="margin-left:50px;margin-right:50px;width:500px">
+    <label for="output">Enter the First Name</label>
+      <input type="text"  class="form-control" id="input1">
+</div>
+<div class="form-group"   style="margin-left:50px;margin-right:50px;width:500px">
+    <label for="output">Enter the First Name</label>
+<input type="text" class="form-control" id="input2">
+</div>
+
+<button id="post-btn" class="btn btn-primary submit" style="margin-left:50px;" onclick="postData(document.getElementById('input1').value, document.getElementById('input2').value)">Post Data</button>
+
+
+
+<script src="{%  static 'js/test.js' %}"></script>
+</body>
+</html>
