@@ -15,9 +15,10 @@ from rest_framework import status
 from rest_framework.response import Response
 from django.db.models import Q
 
-from .models import Population
-from .serializers import PopulationFunctionSerializer
+from dowell.models import Population
+from dowell.serializers import PopulationFunctionSerializer
 from rest_framework.decorators import api_view
+
 
 def get_event_id():
     dd=datetime.now()
@@ -56,36 +57,14 @@ def get_event_id():
     return r.text
 
 #convert function to api
-@csrf_exempt
-def dowelltraining1(request):
-    if (request.method=="POST"):
-        request_data=json.loads(request.body)
-        print(request_data)
-        Name = request_data['name']
-        LastName= request_data['lastname']
-        fullName = f"Your name is {Name} {LastName}"
-        #return JsonResponse ({"Answer":fullName})
-        return HttpResponse(fullName)
+
 
 @csrf_exempt
-def dowellweb(request):
-  
+def dowelltraining2web(request):
     if (request.method=="POST"):
-        print('a')
+    
         Name = request.POST['data1']
         LastName= request.POST['data2']
-        fullName = f"Your name is {Name} {LastName}"
-        return JsonResponse ({"Answer":fullName})
-        #return HttpResponse(fullName)
-
-#dowellconnection insert data
-@csrf_exempt
-def dowelltraining2(request):
-    if (request.method=="POST"):
-        request_data=json.loads(request.body)
-        print(request_data)
-        Name = request_data['name']
-        LastName= request_data['lastname']
         fullName = f"Your name is {Name} {LastName}"
         url = "http://100002.pythonanywhere.com/" 
         #searchstring="ObjectId"+"("+"'"+"6139bd4969b0c91866e40551"+"'"+")"
@@ -111,23 +90,23 @@ def dowelltraining2(request):
             }
 
         response = requests.request("POST", url, headers=headers, data=payload)
-        print(response.text)
-        #return JsonResponse ({"Data inserted sucessfully using dowellcoonection function":response.text})
-        return HttpResponse(response.text)
+        print('aaaa',response.text)
+        print(response)
+        return JsonResponse ({"Answer":fullName})
+        # return HttpResponse(response.text)
+    return render(request , 'index.html')
 
-        #return JsonResponse ({"Answer":fullName})
-#dowellpopulation function to fetch data
 
 
 @csrf_exempt
-def dowelltraining3(request):
+def dowelltraining3web(request):
     if (request.method=="POST"):
-        request_data=json.loads(request.body)
-        print(request_data)
-        db_name = request_data['db_name']
-        collection_name= request_data['collection_name']
-        field_name=request_data['field_name']
-        time_period=request_data['time_period']
+       
+        db_name = request.POST['data1']
+        collection_name= request.POST['data2']
+        field_name= request.POST['data3']
+        time_period= request.POST['data4']
+        print(db_name , collection_name , field_name , time_period)
         def targeted_population(database, collection, fields, period):
             url = 'http://100032.pythonanywhere.com/api/targeted_population/'
             database_details = {
@@ -167,27 +146,9 @@ def dowelltraining3(request):
             headers = {'content-type': 'application/json'}
 
             response = requests.post(url, json=request_data,headers=headers)
-
+            print(response.text)
             return response.text
-        response = targeted_population(db_name,collection_name,field_name,time_period)
-        print(response)
-        #return JsonResponse ({"Data fetched using dowellpopulation function":response})
-        return HttpResponse(response)
-
-@csrf_exempt
-@api_view(['POST'])
-def home(request):
-    serializer = PopulationFunctionSerializer(data=request.data)
-    print(serializer)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['GET'])
-def get_name(request):
-    jobs = Population.objects.all()
-    serializer = PopulationFunctionSerializer(jobs, many=True)
-    return Response(serializer.data)
-
+        response1 = targeted_population(db_name,collection_name,field_name,time_period)
+        return JsonResponse ({"Data fetched using dowellpopulation function":response1})
+    
+    return render(request , 'dowelltraining3web.html')

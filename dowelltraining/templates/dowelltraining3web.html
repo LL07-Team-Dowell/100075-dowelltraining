@@ -155,7 +155,7 @@ return render(request , 'dowelltraining3web.html')
         formData.append('data3', data3);
         formData.append('data4', data4);
         
-        const request = await fetch("http://127.0.0.1:8000/dowell_training_api/dowelltraining3web/", { 
+        const request = await fetch("http://127.0.0.1:8000/dowell_training_webapi/dowelltraining3web/", { 
             
           method: 'POST',
           body: formData,
