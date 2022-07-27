@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,10 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dowell',
     'rest_framework',
-    'corsheaders',
+    'gmailapi_backend',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -108,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -125,3 +126,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+EMAIL_BACKEND = 'gmailapi_backend.mail.GmailBackend'
+
+GMAIL_API_CLIENT_ID = '887259979001-7mf16btbg11o9oubk9iepkp7mt443nh9.apps.googleusercontent.com'
+GMAIL_API_CLIENT_SECRET = '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'
+GMAIL_API_REFRESH_TOKEN = '1//04Pq6-Kt67MTfCgYIARAAGAQSNwF-L9IrP27RafU6iTph-Nyr3MoNw9by4hUiO3pNthoBokZBtHez_5cKlHZ9skJhI8di6mtvdIc'
+
+
+
