@@ -6,7 +6,7 @@ async function postData(data1, data2){
     formData.append('data1', data1);
     formData.append('data2', data2);
 
-    const request = await fetch("http://127.0.0.1:8000/dowell_training_webapi/dowelltraining2web/", { 
+    const request = await fetch("https://100075.pythonanywhere.com/dowell_training_webapi/dowelltraining2web/", { 
         
       method: 'POST',
       body: formData,
