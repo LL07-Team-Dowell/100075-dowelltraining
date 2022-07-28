@@ -1,10 +1,11 @@
 from django.urls import path
 
-from dowelltraining.views import dowelltraining2web, dowelltraining3web
+from dowelltraining.views import connection_function, population_function
 
 urlpatterns =[
+ 
+    path('connection/',connection_function, name= 'connection'),
+    path('population/',population_function, name= 'population'),
 
-    path('dowelltraining2web/',dowelltraining2web, name= 'dowelltraining2web'),
-    path('dowelltraining3web/',dowelltraining3web, name= 'dowelltraining3web'),
 
 ]

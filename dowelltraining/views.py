@@ -3,6 +3,9 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django import template
+
+import time
+import string
 import sys
 import json
 import requests
@@ -60,7 +63,7 @@ def get_event_id():
 
 
 @csrf_exempt
-def dowelltraining2web(request):
+def connection_function(request):
     if (request.method=="POST"):
     
         Name = request.POST['data1']
@@ -90,23 +93,20 @@ def dowelltraining2web(request):
             }
 
         response = requests.request("POST", url, headers=headers, data=payload)
-        print('aaaa',response.text)
-        print(response)
-        return JsonResponse ({"Answer":fullName})
+        return JsonResponse ({'ID':response.text})
         # return HttpResponse(response.text)
-    return render(request , 'index.html')
+    return render(request , 'connection.html')
 
 
 
 @csrf_exempt
-def dowelltraining3web(request):
+def population_function(request):
     if (request.method=="POST"):
-       
         db_name = request.POST['data1']
-        collection_name= request.POST['data2']
-        field_name= request.POST['data3']
-        time_period= request.POST['data4']
-        print(db_name , collection_name , field_name , time_period)
+        collection_name=  request.POST['data2']
+        field_name = request.POST['data3']
+        time_period=  request.POST['data4']
+        field_name = list(str.split(field_name))
         def targeted_population(database, collection, fields, period):
             url = 'http://100032.pythonanywhere.com/api/targeted_population/'
             database_details = {
@@ -146,9 +146,12 @@ def dowelltraining3web(request):
             headers = {'content-type': 'application/json'}
 
             response = requests.post(url, json=request_data,headers=headers)
-            print(response.text)
             return response.text
-        response1 = targeted_population(db_name,collection_name,field_name,time_period)
-        return JsonResponse ({"Data fetched using dowellpopulation function":response1})
+        response = targeted_population(db_name,collection_name,field_name,time_period)
+     
+        return JsonResponse ({"Data fetched using dowellpopulation function":response})
+    return render(request , 'population.html')
     
-    return render(request , 'dowelltraining3web.html')
+ 
+
+
