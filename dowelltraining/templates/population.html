@@ -13,10 +13,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
-  <title>Testing</title>
+  <title>Population</title>
 </head>
 <body style="font-family:Verdana;"><br>
-  <h1 style="text-align:center;">DowellTraining3</h1><br>
+  <h1 style="text-align:center;">Population</h1><br>
   <textarea type="text" class="form-control" id="myInput" name="output" rows="8" cols="30" disabled style="margin-left:50px; margin-right:50px; background-color:black; color:white;">
     
 from dowelltraining3 import dowelltraining3
@@ -118,7 +118,7 @@ return render(request , 'dowelltraining3web.html')
 <button style='margin-left:50px;' class="btn btn-secondary" onclick="myFunction2()">Copy text</button>
 </br>
 </br>
-<div class='div1'>
+
 
 
 
@@ -138,7 +138,7 @@ return render(request , 'dowelltraining3web.html')
     <label for="output">Enter the Time Period</label>
       <input type="text"  class="form-control input1" id="input4">
 </div>
-</div>
+
 <button type='submit'  class="btn btn-primary submit" style="margin-left:50px;" onclick="postData(document.getElementById('input1').value, document.getElementById('input2').value, document.getElementById('input3').value, document.getElementById('input4').value)" >Post Data</button>
 
 
@@ -155,7 +155,7 @@ return render(request , 'dowelltraining3web.html')
         formData.append('data3', data3);
         formData.append('data4', data4);
         
-        const request = await fetch("https://100075.pythonanywhere.com/dowell_training_webapi/dowelltraining3web/", { 
+        const request = await fetch("https://100075.pythonanywhere.com/dowell_training_webapi/population/", { 
             
           method: 'POST',
           body: formData,
@@ -167,7 +167,7 @@ return render(request , 'dowelltraining3web.html')
         console.log(response);
       
       }
-
+    
 </script>
 </body>
 </html>

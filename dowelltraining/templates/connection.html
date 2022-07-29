@@ -13,11 +13,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
-  <title>Testing</title>
+  <title>Connection</title>
 </head>
 <body style="font-family:Verdana;"><br>
-  <h1 style="text-align:center;">DowellTraining2 </h1><br>
-  <textarea type="text" class="form-control" id="myInput" name="output" rows="6" cols="30" disabled style="margin-left:50px; margin-right:50px; background-color:black; color:white;">
+  <h1 style="text-align:center;">Connection</h1><br>
+  <textarea type="text" class="form-control" id="myInput" name="output" rows="8" cols="30" disabled style="margin-left:50px; margin-right:50px; background-color:black; color:white;">
     from dowelltraining2 import dowelltraining2
 
     def call_fun(name,lastname):
@@ -107,6 +107,31 @@
 
 
 
-<script src="{%  static 'js/test.js' %}"></script>
+<script>
+    async function postData(data1, data2){
+
+        if (data1.length < 1 || data2.length < 1) return
+            
+        let formData = new FormData();
+        formData.append('data1', data1);
+        formData.append('data2', data2);
+    
+        const request = await fetch("https://100075.pythonanywhere.com/dowell_training_webapi/connection/", { 
+            
+          method: 'POST',
+          body: formData,
+    
+        });
+        
+        const response = await request.text();
+    
+        console.log(response);
+    
+    }
+    
+    
+    
+    
+</script>
 </body>
 </html>
