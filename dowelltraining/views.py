@@ -79,7 +79,7 @@ def get_event_id(request):
 def connection_function(request):
 
  context = {'id':event_id }
- print('ahsan')
+
  if (request.method=="POST"):
     
         Name = request.POST['data1']
@@ -111,9 +111,11 @@ def connection_function(request):
             }
 
         response = requests.request("POST", url, headers=headers, data=payload)
-        response1 = { 'connection_id':  response.text }
-        return JsonResponse(response1)
-        # return HttpResponse(response.text)
+       
+        # return render(request,'connection.html', response1) 
+
+        # return JsonResponse(response1)
+        return HttpResponse(response.text)
  return render(request , 'connection.html' , context )
 
 
@@ -165,10 +167,13 @@ def population_function(request):
             headers = {'content-type': 'application/json'}
 
             response = requests.post(url, json=request_data,headers=headers)
+   
             return response.text
+        
         response = targeted_population(db_name,collection_name,field_name,time_period)
-     
-        return JsonResponse ({"Data fetched using dowellpopulation function":response})
+      
+        return HttpResponse(response)
+        # return JsonResponse ({"Data fetched using dowellpopulation function":response})
     return render(request , 'population.html')
     
  

@@ -91,7 +91,7 @@
             display: block;
     width: 45px;
     height: 15px;
-    background: #4E9CAF;
+    background: green;
     padding: 10px;
     text-align: center;
     border-radius: 5px;
@@ -196,7 +196,7 @@
             display: block;
     width: 115px;
     height: 25px;
-    background: #4E9CAF;
+    background: green;
     padding: 10px;
     text-align: center;
     border-radius: 5px;
@@ -274,18 +274,19 @@
   </pre>
  </div>
     <div class='right_div'>
+      <button id='btn2' class='btn'> <i class="fa fa-copy" ></i></button>
       <p class='rightP'>Code Area </p>
 
     
       <a class='clickhere' href='/dowell_training_webapi/get_event_id '>Click Here </a>
   
-      <div class='returnid'>{{id}}</div>
+      <div id='returnid' class='returnid'>{{id}}</div>
     </div>
 <div class='button'>
   <a href='/dowell_training_webapi/Home' style='color:green; font-size: 30px;'><p>Previous</a>
-    {% if  id  %}
+  
   <a href='/dowell_training_webapi/connection/' style='color:green;font-size: 30px;'>Next</a>
-  {% endif %}
+
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -302,6 +303,18 @@ function copyFunction() {
 
 document.getElementById('btn').addEventListener('click', copyFunction);
 
+  
+function copyFunction2() {
+  const copyText = document.getElementById("returnid").textContent;
+  const textArea = document.createElement('textarea');
+  textArea.textContent = copyText;
+  document.body.append(textArea);
+  textArea.select();
+  document.execCommand("copy");
+  textArea.remove();
+}
+
+document.getElementById('btn2').addEventListener('click', copyFunction2);
 </script>
 </body>
 </html>

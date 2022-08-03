@@ -237,11 +237,10 @@ input[type=text] {
 <div class='div2'>
 <p class ='p2'>Descriptions :
 <ul  style='font-size:25px;'>
-<li> Dowell event creation is a function which takes different input as varible
-     passed from login function and return an event id .
+<li> Dowellconnection function is a function which helps to insert data to the database.
 </li>
-<li>EventId is used in dowellconnection function to insert data.</li>
-<li>EventId has meaningful information </li>
+<li>Data are inserted as json data</li>
+<li>Every insertion there should be an event id</li>
 
 </ul> </p>
 </div>
@@ -284,6 +283,7 @@ input[type=text] {
   </pre>
  </div>
     <div class='right_div'>
+      <button id='btn2' class='btn'> <i class="fa fa-copy" ></i></button>
       <p class='rightP'>Code Area </p>
       <input type="hidden"  class="form-control" id="inputid" value={{id}}>
       <div class="form-group"    style="margin-left:50px;margin-right:50px;width:500px">
@@ -292,7 +292,7 @@ input[type=text] {
     </div>
   </br>
     <div class="form-group"   style="margin-left:50px;margin-right:50px;width:500px">
-        <label for="output">Enter the First Name</label>
+        <label for="output">Enter the Second Name</label>
     <input type="text" class="form-control" id="input2">
     </div>
     
@@ -301,17 +301,28 @@ input[type=text] {
     
     
   
-      <div class='returnid'>{{connection_id}}</div>
+      <div id='returnid' class='returnid'></div>
     </div>
 <div class='button'>
-  <a href='/dowell_training_webapi/Home' style='color:green; font-size: 30px;'><p>Previous</a>
-  <a href='#' style='color:green;font-size: 30px;'>Next</a>
+  <a href='/dowell_training_webapi/event_creation'style='color:green; font-size: 30px;'><p>Previous</a>
+  <a href='/dowell_training_webapi/population' style='color:green;font-size: 30px;'>Next</a>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 
-
+function copyFunction() {
+    const copyText = document.getElementById("code").textContent;
+    const textArea = document.createElement('textarea');
+    textArea.textContent = copyText;
+    document.body.append(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    textArea.remove();
+  }
+  
+document.getElementById('btn').addEventListener('click', copyFunction);
+  
 
 
 async function postData(data1, data2 , data3){
@@ -334,13 +345,25 @@ async function postData(data1, data2 , data3){
         );
        
         const response = await request.text();
+        document.getElementById('returnid').innerHTML = response;
        
     
         console.log(response);
     
     }
     
-    
+      
+function copyFunction2() {
+  const copyText = document.getElementById("returnid").textContent;
+  const textArea = document.createElement('textarea');
+  textArea.textContent = copyText;
+  document.body.append(textArea);
+  textArea.select();
+  document.execCommand("copy");
+  textArea.remove();
+}
+
+document.getElementById('btn2').addEventListener('click', copyFunction2);
     
     
 </script>
