@@ -22,8 +22,17 @@ from dowell.models import Population
 from dowell.serializers import PopulationFunctionSerializer
 from rest_framework.decorators import api_view
 
+def Dowelltraining_main(request):
 
-def get_event_id():
+    return render(request , 'Dowelltraining_home.html')
+
+def event_creation(request):
+    
+    
+ return render(request , 'event_creation.html' )
+
+def get_event_id(request):
+    global event_id
     dd=datetime.now()
     time=dd.strftime("%d:%m:%Y,%H:%M:%S")
     url="https://100003.pythonanywhere.com/event_creation"
@@ -57,18 +66,27 @@ def get_event_id():
 
 
     r=requests.post(url,json=data)
-    return r.text
+    event_id = r.text
+    context = {'id':event_id}
+    return render(request, 'event_creation.html', context )
+    
+    
 
 #convert function to api
 
 
 @csrf_exempt
 def connection_function(request):
-    if (request.method=="POST"):
+
+ context = {'id':event_id }
+
+ if (request.method=="POST"):
     
         Name = request.POST['data1']
         LastName= request.POST['data2']
+        get_event_id= request.POST['data3']
         fullName = f"Your name is {Name} {LastName}"
+        print(fullName)
         url = "http://100002.pythonanywhere.com/" 
         #searchstring="ObjectId"+"("+"'"+"6139bd4969b0c91866e40551"+"'"+")"
         payload = json.dumps({
@@ -80,7 +98,7 @@ def connection_function(request):
             "function_ID": "ABCDE",
             "command": "insert",
             "field": {
-                "eventId" : get_event_id(),
+                "eventId" : get_event_id,
                 "full_name": fullName
                 },
             "update_field": {
@@ -93,9 +111,12 @@ def connection_function(request):
             }
 
         response = requests.request("POST", url, headers=headers, data=payload)
-        return JsonResponse ({'ID':response.text})
-        # return HttpResponse(response.text)
-    return render(request , 'connection.html')
+       
+        # return render(request,'connection.html', response1) 
+
+        # return JsonResponse(response1)
+        return HttpResponse(response.text)
+ return render(request , 'connection.html' , context )
 
 
 
@@ -146,10 +167,13 @@ def population_function(request):
             headers = {'content-type': 'application/json'}
 
             response = requests.post(url, json=request_data,headers=headers)
+   
             return response.text
+        
         response = targeted_population(db_name,collection_name,field_name,time_period)
-     
-        return JsonResponse ({"Data fetched using dowellpopulation function":response})
+      
+        return HttpResponse(response)
+        # return JsonResponse ({"Data fetched using dowellpopulation function":response})
     return render(request , 'population.html')
     
  
