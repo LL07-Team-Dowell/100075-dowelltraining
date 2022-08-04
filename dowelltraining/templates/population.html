@@ -364,7 +364,7 @@ async function postData(data1, data2 , data3 , data4)
                        formData.append('data2', data2);       
                          formData.append('data3', data3);        
                           formData.append('data4', data4);                 
-                           const request = await fetch("http://127.0.0.1:8000/dowell_training_webapi/population/", {                         method: 'POST',           body: formData,                });                  
+                           const request = await fetch("https://100075.pythonanywhere.com/dowell_training_webapi/population/", {                         method: 'POST',           body: formData,                });                  
                            const response = await request.text();  
                            document.getElementById('returnid').innerHTML = response;
                      

@@ -77,7 +77,7 @@ def get_event_id(request):
 
 @csrf_exempt
 def connection_function(request):
-
+ global connection_id
  context = {'id':event_id }
 
  if (request.method=="POST"):
@@ -115,7 +115,8 @@ def connection_function(request):
         # return render(request,'connection.html', response1) 
 
         # return JsonResponse(response1)
-        return HttpResponse(response.text)
+        connection_id = response.text
+        return HttpResponse(connection_id)
  return render(request , 'connection.html' , context )
 
 
@@ -171,8 +172,8 @@ def population_function(request):
             return response.text
         
         response = targeted_population(db_name,collection_name,field_name,time_period)
-      
         return HttpResponse(response)
+        
         # return JsonResponse ({"Data fetched using dowellpopulation function":response})
     return render(request , 'population.html')
     
