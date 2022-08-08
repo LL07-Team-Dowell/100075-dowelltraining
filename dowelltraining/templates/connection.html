@@ -288,12 +288,12 @@ input[type=text] {
       <input type="hidden"  class="form-control" id="inputid" value={{id}}>
       <div class="form-group"    style="margin-left:50px;margin-right:50px;width:500px">
         <label for="output">Enter the First Name</label>
-          <input type="text"  class="form-control" id="input1">
+          <input type="text"  class="form-control" id="input1" required>
     </div>
   </br>
     <div class="form-group"   style="margin-left:50px;margin-right:50px;width:500px">
         <label for="output">Enter the Second Name</label>
-    <input type="text" class="form-control" id="input2">
+    <input type="text" class="form-control" id="input2" required>
     </div>
     
     <button type='submit'  class="btn btn-primary submit" style="margin-left:50px;" onclick="postData(document.getElementById('input1').value, document.getElementById('input2').value,document.getElementById('inputid').value)">Post Data</button>
@@ -305,7 +305,9 @@ input[type=text] {
     </div>
 <div class='button'>
   <a href='/dowell_training_webapi/event_creation'style='color:green; font-size: 30px;'><p>Previous</a>
+    {% if id %}
   <a href='/dowell_training_webapi/population' style='color:green;font-size: 30px;'>Next</a>
+  {% endif %}
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -334,7 +336,7 @@ async function postData(data1, data2 , data3){
         formData.append('data2', data2);
         formData.append('data3', data3);
     
-        const request = await fetch("https://100075.pythonanywhere.com/dowell_training_webapi/connection/", { 
+        const request = await fetch("http://127.0.0.1:8000/dowell_training_webapi/connection/", { 
             
           method: 'POST',
           body: formData,

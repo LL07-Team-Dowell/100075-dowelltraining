@@ -1,3 +1,5 @@
+from contextlib import ContextDecorator
+from multiprocessing import context
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -115,7 +117,8 @@ def connection_function(request):
         # return render(request,'connection.html', response1) 
 
         # return JsonResponse(response1)
-        connection_id = response.text
+        connection_id = response
+        # print(connection_id)
         return HttpResponse(connection_id)
  return render(request , 'connection.html' , context )
 
@@ -123,6 +126,8 @@ def connection_function(request):
 
 @csrf_exempt
 def population_function(request):
+    r_out = connection_id.json()
+    current_insertionid=r_out['inserted_id']
     if (request.method=="POST"):
         db_name = request.POST['data1']
         collection_name=  request.POST['data2']
@@ -164,15 +169,20 @@ def population_function(request):
                 'stages':stage_input_list,
                 'time_input':time_input,
                 }
-
             headers = {'content-type': 'application/json'}
 
             response = requests.post(url, json=request_data,headers=headers)
-   
-            return response.text
+            res= json.loads(response.text)
+            return res
+
         
         response = targeted_population(db_name,collection_name,field_name,time_period)
-        return HttpResponse(response)
+        # print(response)
+        for userdata in response['normal']['data'][0]:
+         if userdata["_id"] == current_insertionid:
+            current_userdatavalue = userdata
+        current_userdata = json.dumps(current_userdatavalue) 
+        return HttpResponse(current_userdata)
         
         # return JsonResponse ({"Data fetched using dowellpopulation function":response})
     return render(request , 'population.html')

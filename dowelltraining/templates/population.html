@@ -194,9 +194,8 @@ input[type=text] {
         }
         .returnid{
           margin-left: 30px;
-          width:420px;
-          height: 420px;
-          font-size:7px;
+          width:400px;
+          height: 150px;
           margin-top: 30px;
           padding-left: 30px;
           font-weight: bold;
@@ -306,36 +305,32 @@ input[type=text] {
       <p class='rightP'>Code Area </p>
       <div class="form-group"   style="margin-left:50px;margin-right:50px;width:500px">
         <label for="output">Enter the DataBase Name</label>
-          <input type="text"  class="form-control input1" id="input1">
+          <input type="text"  class="form-control input1" id="input1" value='hr_hiring' required>
     </div>
   </br>
     <div class="form-group"   style="margin-left:50px;margin-right:50px;width:500px">
         <label for="output">Enter the Collection</label>
-    <input type="text" class="form-control input1" id="input2" >
+    <input type="text" class="form-control input1" id="input2" value='dowelltraining' required>
     </div>
   </br>
     <div class="form-group"   style="margin-left:50px;margin-right:50px;width:500px">
         <label for="output">Enter the Field Name</label>
-          <input type="text"  class="form-control input1" id="input3" >
+          <input type="text"  class="form-control input1" id="input3" value='full_name' required>
     </div>
   </br>
     <div class="form-group"   style="margin-left:50px;margin-right:50px;width:500px">
         <label for="output">Enter the Time Period</label>
-          <input type="text"  class="form-control input1" id="input4" >
+          <input type="text"  class="form-control input1" id="input4" value='life_time' required>
     </div>
     
     <button type='submit'  class="btn btn-primary submit" style="margin-left:50px;" onclick="postData(document.getElementById('input1').value, document.getElementById('input2').value, document.getElementById('input3').value, document.getElementById('input4').value)" >Post Data</button>
-    
-    
-    
-    
-  <table>
+
     
       <div id='returnid' class='returnid'>
     
       </div>
+    
     </div>
-  </table>
 <div class='button'>
   <a href='/dowell_training_webapi/event_creation'style='color:green; font-size: 30px;'><p>Previous</a>
   <a href='#' style='color:green;font-size: 30px;'>Next</a>
@@ -364,7 +359,7 @@ async function postData(data1, data2 , data3 , data4)
                        formData.append('data2', data2);       
                          formData.append('data3', data3);        
                           formData.append('data4', data4);                 
-                           const request = await fetch("https://100075.pythonanywhere.com/dowell_training_webapi/population/", {                         method: 'POST',           body: formData,                });                  
+                           const request = await fetch("http://127.0.0.1:8000/dowell_training_webapi/population/", {                         method: 'POST',           body: formData,                });                  
                            const response = await request.text();  
                            document.getElementById('returnid').innerHTML = response;
                      
